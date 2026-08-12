@@ -1,18 +1,27 @@
-name: My First GitHub Action
+name: Run Python Script
 
-# This tells GitHub to run the script whenever you push a change
 on: [push]
 
 jobs:
-  say-hello:
-    # This runs the code on a free Linux computer hosted by GitHub
+  run-python-job:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Print a message in the logs
-      - name: Greet the user
-        run: echo "Hello, World! You just ran your first GitHub Action."
+      - name: Check out code
+        uses: actions/checkout@v4
 
-      # Step 2: Print the server time
-      - name: Show the current time
-        run: date
+      # Installs Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Installs the requests library from your requirements.txt file
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Runs your python file
+      - name: Execute script
+        run: python check_status.py
