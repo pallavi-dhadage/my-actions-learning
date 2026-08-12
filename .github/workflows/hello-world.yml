@@ -1,0 +1,18 @@
+name: My First GitHub Action
+
+# This tells GitHub to run the script whenever you push a change
+on: [push]
+
+jobs:
+  say-hello:
+    # This runs the code on a free Linux computer hosted by GitHub
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Print a message in the logs
+      - name: Greet the user
+        run: echo "Hello, World! You just ran your first GitHub Action."
+
+      # Step 2: Print the server time
+      - name: Show the current time
+        run: date
