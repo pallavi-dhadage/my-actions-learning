@@ -1,6 +1,12 @@
 name: Run Python Script
 
-on: [push]
+# Triggers define when the script runs
+on:
+  push:
+    branches: [ "main" ]
+  schedule:
+    # This syntax tells GitHub to run this script at minute 0 of every hour
+    - cron: '0 * * * *'
 
 jobs:
   run-python-job:
@@ -10,18 +16,15 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      # Installs Python environment
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # Installs the requests library from your requirements.txt file
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Runs your python file
       - name: Execute script
         run: python check_status.py
