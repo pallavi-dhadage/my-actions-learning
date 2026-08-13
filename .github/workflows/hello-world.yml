@@ -1,12 +1,12 @@
 name: Run Python Script
 
-# Triggers define when the script runs
 on:
   push:
     branches: [ "main" ]
   schedule:
-    # This syntax tells GitHub to run this script at minute 0 of every hour
     - cron: '0 * * * *'
+  # NEW: This line creates a manual "Run workflow" button in your UI
+  workflow_dispatch:
 
 jobs:
   run-python-job:
